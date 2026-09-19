@@ -3,9 +3,15 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
 while True:
-    min = int(input("Input min: "))
-    max = int(input("Input max: "))
-    tries = int(input("Input max guess (0 = Inf): "))
+    while True:
+        try:
+            min = int(input("Input min: "))
+            max = int(input("Input max: "))
+            tries = int(input("Input max guess (0 = Inf): "))
+        except ValueError:
+            print(Fore.RED + "ERROR: Please input a valid number!")
+            continue
+        break
 
     if tries <= 0:
         tries = float("Inf")
@@ -43,4 +49,3 @@ while True:
         break        
 
     
-
