@@ -2,6 +2,8 @@ import random as rd
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
+print("Test")
+
 while True:
     while True:
         try:
