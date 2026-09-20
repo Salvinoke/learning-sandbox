@@ -17,44 +17,59 @@ for rarity in pool:
 
     TotalWeight += chances
 
-while True:
-    try:
-        gachaType = int(input(Fore.CYAN + """Pick gacha method:
+def gacha():
+    while True:
+        try:
+            gachaType = int(input(Fore.CYAN + """Pick gacha method:
 [1] Single Pull
 [2] 10x Pull
 Input: """))
 
-        if gachaType not in [1,2]:
-            print(Fore.RED + "ERROR: Please input either 1 or 2!")
+            if gachaType not in [1,2]:
+                print(Fore.RED + "ERROR: Please input either 1 or 2!")
+                continue
+            
+        except ValueError:
+            print(Fore.RED + "ERROR: Input a valid value!")
             continue
-        
-    except ValueError:
-        print(Fore.RED + "ERROR: Input a valid value!")
-        continue
-    break
+        break
 
-print("="*50)
+    print("="*50)
 
-if gachaType == 1:
-    keyNum = rand.randint(0,int(TotalWeight))
-    weight = 0
-    
-    for rarity in pool:
-        chances = pool[rarity]
-        weight += chances
-    
-        if keyNum <= weight:
-            print(rarity)
-            break
-else:
-    for i in range(10):
+    if gachaType == 1:
         keyNum = rand.randint(0,int(TotalWeight))
         weight = 0
-
+        
         for rarity in pool:
             chances = pool[rarity]
             weight += chances
-
+        
             if keyNum <= weight:
-                print(rarity)
-                break
+                return [rarity]
+    else:
+        result = []
+
+        for i in range(10):
+            keyNum = rand.randint(0,int(TotalWeight))
+            weight = 0
+
+            for rarity in pool:
+                chances = pool[rarity]
+                weight += chances
+
+                if keyNum <= weight:
+                    result.append(rarity)
+                    break
+
+        return result        
+
+while True:    
+    result = gacha()
+    for rarity in result:
+        print(rarity)
+
+    replay = input(Fore.CYAN + "Continue? (Y/N): ").upper()
+
+    if replay != "Y":
+        print("Gamblers quit before they win big...")
+        break
