@@ -1,7 +1,7 @@
 import random as rand
 
-width = 20
-height = 11
+width = int(input("Input width: "))
+height = int(input("Input height: "))
 
 randomnum = rand.randint(1,height-2)
 randompos = rand.randint(-(width//2-1),(width//2-2))
